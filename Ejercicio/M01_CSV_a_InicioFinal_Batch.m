@@ -10,11 +10,13 @@ tic
 %graphics_toolkit gnuplot
 
 file_amerb='PuntosCostaAncud.txt';
+skip = 10;
+
 disp('Leer Sitios')
 amers=load(file_amerb);
 
-a_lat=amers(1:10:end,2);
-a_lon=amers(1:10:end,1);
+a_lat=amers(1:skip:end,2);
+a_lon=amers(1:skip:end,1);
 
 tabla=[];
 quienconquien=[];
@@ -257,6 +259,6 @@ toc
 tic
 %%keyboard
 disp('Diagrama Sankey')
-sankey_diagram([prefix,'_MatrizConectividadPotencial.txt'],file_amerb,prefix)
+sankey_diagram([prefix,'_MatrizConectividadPotencial.txt'],file_amerb,prefix,skip)
 toc
 end % ifile
