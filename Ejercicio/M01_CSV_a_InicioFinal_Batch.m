@@ -5,12 +5,13 @@ clear all
 win_start
 tic
 %
-%pkg load octcdf
-%pkg load statistics
-%graphics_toolkit gnuplot
 
+%file_amerb='PuntosCosta_AV.txt';
+%file_amerb='Hab_Rocoso_Coquimbo.txt';
 file_amerb='PuntosCostaAncud.txt';
+
 skip = 10;
+radius = 2000;  % 2km for Coq/Ancud, 7km for AV
 
 disp('Leer Sitios')
 amers=load(file_amerb);
@@ -26,11 +27,10 @@ tic
 
 for ifile=1:13
     
-if ifile < 10
-    file_prefix=['Inicial_1-10_Ancud_720_M',num2str(ifile),'_Lapa'];
-else
-    file_prefix=['Inicial_1-10_Ancud_720_M',num2str(ifile),'_Lapa'];
-end
+%    file_prefix=['Inicial_1-10_Ancud_720_M',num2str(ifile),'_Lapa'];
+    file_prefix=['Uniforme_1-10_Coquimbo_720_M',num2str(ifile),'_Lapa'];
+%    file_prefix=['Uniforme_1-10_AV_720_M',num2str(ifile),'_Lapa'];
+
 
 for ii=1:size(file_prefix,1)
 num_lat_lon=[];
@@ -73,7 +73,9 @@ for i=1:size(latini,1)  % Trayectorias
 
    dista_ini=haversine(a_lat,a_lon,latini(i),lonini(i));
    dista_end=haversine(a_lat,a_lon,latend(i),lonend(i));
-      
+
+   if (min(dista_ini) < radius) && (min(dista_end) < radius)
+
    coord_ini=find(dista_ini == min(dista_ini));
    coord_end=find(dista_end == min(dista_end));
    end_status=status(i);
@@ -109,7 +111,8 @@ for i=1:size(latini,1)  % Trayectorias
       o0 = o0 +1;
       not_stranded(4,coord_ini(1)) = not_stranded(4,coord_ini(1))+1;
    end
-end
+end  % Radius
+end  % Traj
 
 disp('Totales')
 
