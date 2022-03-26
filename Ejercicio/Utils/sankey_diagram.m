@@ -1,4 +1,4 @@
-function sankey_diagram(filename,puntos,prefix)
+function sankey_diagram(filename,puntos,prefix,skip)
 
 %
 % filename es el archivo con la matriz de conectividad potencial
@@ -14,7 +14,6 @@ tot_calc=total_particles;
 
 amerb =load(puntos);
 
-skip = 1
 a_lat=amerb(1:skip:end,2);
 a_lon=amerb(1:skip:end,1);
 
