@@ -38,11 +38,11 @@ for i=1:length(aux)
 end
 
 % destino
-%%clear right_labels
-%%for i = unique(data(:,2))'
-%%    right_labels{i} =  strcat(string(i));% labels para figura
-%%end
-right_labels=left_labels;
+clear right_labels
+for i = unique(data(:,2))'
+    right_labels{i} =  strcat(string(i));% labels para figura
+end
+%right_labels=left_labels;  % Problems in sites with 100% self return
 
 % matriz de valores origen-destino
 clear auxdata
